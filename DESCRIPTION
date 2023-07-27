@@ -1,0 +1,30 @@
+Package: bemendel
+Type: Package
+Title: Practice Mendelian Genetics in R
+Version: 0.0.0.9000
+Authors@R: c(
+  person("Alexander", "Wireko Kena", email = "alex.kena24@gmail.com", 
+         role = c("aut", "cre")),
+  person("Ebenezer", "Ogoe", email = "ebenezerogoe@gmail.com", 
+         role = c("aut")),
+  person("Geoffrey", "Preston Morris", email = "geoff.morris@colostate.edu", 
+         role = c("aut")))
+Maintainer: Alexander Wireko Kena <alex.kena24@gmail.com>
+Description: Make genetic crosses for diploid species and visualize genotypes of
+    progenies in a Punnett square. It allows users to visualize phenotypic predictions 
+    for basic classical genetics hypotheses on gene action and allele interactions.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    covr (>= 3.6.2),
+    knitr (>= 1.43),
+    rmarkdown (>= 2.23),
+    shinytest2 (>= 0.2.1),
+    testthat (>= 3.1.10)
+Imports: 
+    ggplot2 (>= 3.4.2),
+    MASS (>= 7.3.60),
+    reshape2 (>= 1.4.4)
+Depends: 
+    R (>= 4.3)
