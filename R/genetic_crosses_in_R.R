@@ -1,24 +1,22 @@
-
-
 #' Function to split inputted parental genotypes into alleles for each locus in
-#' a diploid species.
+#' a diploid species
 #'
 #' @param x is a character or string object of genotype for at least one locus.
-#' x should be either lower or uppercase letters of the Latin/English alphabet.
-#' Uppercase letters represent dominant alleles, and lowercase letters denote
-#' recessive alleles.
 #'
 #' @returns a list object of two elements representing the number of loci and
 #' split loci and loci alleles
-#'
-#' @examples
-#'
-#' library(bemendel)
-#' mat_geno <- split_geno("AaBb")$Loci # Get split loci and alleles
-#' mat_geno
-#'
 #' @export
 #'
+#' @details
+#' \code{x} should be either lower or uppercase letters of the Latin/English alphabet.
+#' Uppercase letters represent dominant alleles, and lowercase letters denote
+#' recessive alleles.
+#'
+#' @examples
+#' # library(bemendel)
+#' mat_geno <- split_geno("AaBb")$Loci
+#' mat_geno
+
 split_geno <- function(x){
 
    geno <- gsub(" ", "", x) # Remove white spaces
@@ -50,26 +48,29 @@ split_geno <- function(x){
 }
 
 
-#' #' Check whether locus will segregate using this function
-#' #' Returns a statement about whether locus is homo or hetero
-#' #'
-#' Seg <- function(x){
+#' Check whether a locus will segregate using this function
 #'
-#'   if (x[[1]] == x[[2]]) {
-#'     paste("Locus", toupper(x[[1]]), "is homozygous, hence would not segregate.")
+#' @param x a character vector object of split alleles for each locus.
 #'
-#'   } else (paste("Locus", toupper(x[[1]]), "is heterozygous, hence would segregate."))
-#' }
+#' @returns returns a string about whether locus is homozygous or heterozygous.
+#' @export
 #'
-#' # Test Seq func
-#' #' Output is a string object
-#' Seg(Loci.ls[[1]])
-#' cat(unlist(sapply(Loci.ls, Seg)), "\n")
+#' @examples
+#' # Output is a string object
+#' x <- split_geno("AABb")$Loci
+#' is.seg(x[[1]])
+#' is.seg(x[[2]])
+
+is.seg <- function(x){
+
+  if (x[1] == x[2]) {
+   paste("Locus", toupper(x[1]), "is homozygous, hence would not segregate.")
+
+  } else (paste("Locus", toupper(x[1]), "is heterozygous, hence would segregate."))
+
+ }
 
 
-
-# Derive gametes for both parents
-#' Output is a data frame object
 
 #' Function to generate parental gametes
 #'
@@ -78,19 +79,17 @@ split_geno <- function(x){
 #'
 #' @returns a factor object that contain all possible gametes that can be
 #'  produced by an individual at meiosis.
-#'
-#'  @examples
-#'
-#'  library(bemendel)
-#'  mat_geno <- split_geno("AaBb")$Loci # Get split loci and alleles
-#'  mat_gam <- gamete(mat_geno)
-#'  mat_gam
-#'
 #' @export
 #'
+#' @examples
+#'  # library(bemendel)
+#'  mat_geno <- split_geno("AaBb")$Loci
+#'  mat_gam <- gamete(mat_geno)
+#'  mat_gam
+
 gamete <- function(x){
 
-  gg <- expand.grid(x)# Generates allele combinations
+  gg <- expand.grid(x) # Generates allele combinations
 
   # Find unique gametes; output is a factor object of unique gametes
   gam <- unique(interaction(gg[1:nrow(gg),], sep = ""))
@@ -100,22 +99,19 @@ gamete <- function(x){
 }
 
 
-
 #' Function to order allele combinations at a locus -- Dominant allele first
 #' Order alleles (dominant allele comes first at each locus)
 #'
-#' @param x a list object containing split loci and alleles at each locus
+#' @param x a list object containing split loci and alleles at each locus.
 #'
-#' @returns ordered alleles at each locus
-#'
-#' @examples
-#'
-#'  library(bemendel)
-#'  mat_geno <- split_geno("AaBb")$Loci # Get split loci and alleles
-#'  order_als(mat_geno$Locus_1)
-#'
+#' @returns ordered alleles at each locus.
 #' @export
 #'
+#' @examples
+#'  # library(bemendel)
+#'  mat_geno <- split_geno("AaBb")$Loci
+#'  order_als(mat_geno$Locus_1)
+
 order_als <- function(x) {
 
   if (x[[1]] == x[[2]]) {
@@ -132,26 +128,21 @@ order_als <- function(x) {
 }
 
 
-
-
 #' Function to create punnett square given the genotypes of parents
 #'
 #' @param female.geno is a character object for the genotype of the female
-#' parent
-#' @param male.geno  is a character object for the genotype of the male parent
+#' parent.
+#' @param male.geno  is a character object for the genotype of the male parent.
 #'
 #' @returns a punnett square table showing the genotypes of progenies in a
-#' genetic cross
+#' genetic cross.
+#' @export
 #'
 #' @examples
-#'
-#' library(bemendel)
+#' # library(bemendel)
 #' pun1 <- do_pun(female.geno = "AaBbDd", male.geno = "AaBbDd")
-#' pun1$punnett_square # Get punnett square
-#' pun1$pun_summary # Get punnett square summary
-#'
-#'
-#' @export
+#' pun1$punnett_square
+#' pun1$pun_summary
 
 do_pun <- function(female.geno, male.geno) {
 
@@ -214,20 +205,17 @@ return(tabs)
 
 #' Function to melt punnett square to a long format data frame for plotting
 #'
-#' @param pun a matrix of punnett square containing progeny genotypes
+#' @param pun a matrix of punnett square containing progeny genotypes.
 #'
-#' @returns a long format data frame for plotting punnett square
+#' @returns a long format data frame for plotting punnett square.
+#' @export
 #'
 #' @examples
-#'
-#' library(bemendel)
+#' # library(bemendel)
 #' pun1 <- do_pun(female.geno = "AaBbDd", male.geno = "AaBbDd")
 #' long_df <- pun2df(pun1$punnett_square)
 #' long_df
-#'
-#' @export
-#'
-#'
+
 pun2df <- function(pun){
 
   # Convert punnett square to a vector object and split progeny genotypes
@@ -262,14 +250,12 @@ pun2df <- function(pun){
   # ggplot2
   testdf <- reshape2::melt(as.matrix(pun), value.name = "geno")
 
-  #' Add phenotypic group for each genotype to the melted data frame
+  # Add phenotypic group for each genotype to the melted data frame
   testdf$phenotype <- as.vector(unlist(x))
 
   return(testdf)
 
 }
-
-
 
 
 #' Function to check if locus is heterozygous in diploid species
@@ -279,13 +265,11 @@ pun2df <- function(pun){
 #'
 #' @returns a logical value of TRUE if locus is heterozygous or FALSE if locus is
 #' homozygous.
+#' @export
 #'
 #' @examples
-#'
-#' library(bemendel)
+#' # library(bemendel)
 #' is.het(split_geno("AaBb")$Loci[[1]])
-#'
-#' @export
 
 is.het <- function(x){
 
@@ -308,21 +292,12 @@ is.het <- function(x){
 #'
 #' @param female.geno is a character object for the genotype of the female
 #' parent.
-#'
 #' @param male.geno  is a character object for the genotype of the male parent.
-#'
 #' @param type a string abbreviation indicating the type of digenic epistasis;
 #' see details for more information.
 #'
 #' @returns a melted long format data frame.
-#'
-#' @examples
-#'
-#' library(bemendel)
-#' epi_de <- epist(female.geno = "AaBb", male.geno = "AaBb", type = "DE")
-#' epi_de
-#' table(epi_de$epistasis)
-#'
+#' @export
 #'
 #' @details
 #' The following classical digenic epistasis types are implemented:
@@ -332,8 +307,12 @@ is.het <- function(x){
 #' RE: Recessive epistasis (9:3:4 ratio)
 #' DnRE: Dominant and recessive epistasis (13:3 ratio)
 #'
-#' @export
-#'
+#' @examples
+#' # library(bemendel)
+#' epi_de <- epist(female.geno = "AaBb", male.geno = "AaBb", type = "DE")
+#' epi_de
+#' table(epi_de$epistasis)
+
 epist <- function(female.geno,
                   male.geno,
                   type = c('DDE', 'DRE', 'DE', 'RE', 'DnRE')){
@@ -410,29 +389,10 @@ epist <- function(female.geno,
 #' assortment and classical digenic interactions.
 #'
 #' @param pun2df a melted long format data frame of punnett square containing
-#' progeny genotypes and phenotypic class designation
-#' @param text_size a numeric value for setting text size in plot
+#' progeny genotypes and phenotypic class designation.
+#' @param text_size a numeric value for setting text size in plot.
 #' @param epistasis a logical value indicating whether input data frame contains
 #' digenic epistatic phenotypes.
-#'
-#'
-#' @examples
-#'
-#' library(bemendel)
-#'
-#' # Generate punnett square
-#' pun1 <- do_pun(female.geno = "AaBb", male.geno = "AaBb")
-#'
-#' # Melt punnett to a long format data frame for plotting
-#' long_df <- pun2df(pun1$punnett_square)
-#'
-#' # Visualize phenotypic groups based on independent assortment
-#' pun_plot(pun2df = long_df, text_size = 6)
-#'
-#' # Visualize phenotypic groups based on dominant epistatic gene action
-#' # Dominant epistasis (DE)
-#' epi_de <- epist(female.geno = "AaBb", male.geno = "AaBb", type = "DE")
-#' pun_plot(pun2df = epi_de, text_size = 6, epistasis = TRUE)
 #'
 #'
 #' @details
@@ -449,9 +409,25 @@ epist <- function(female.geno,
 #' Dominant and recessive epistasis = 13:3 (recessive suppressors)
 #'
 #' @returns a plot of the punnett square showing the phenotypic classes for
+#' gene action hypothesis.
 #'
 #'
 #' @export
+#'
+#' @examples
+#' # library(bemendel)
+#' # Generate punnett square
+#' pun1 <- do_pun(female.geno = "AaBb", male.geno = "AaBb")
+#'
+#' # Melt punnett to a long format data frame for plotting
+#' long_df <- pun2df(pun1$punnett_square)
+#'
+#' # Visualize phenotypic groups based on independent assortment
+#' pun_plot(pun2df = long_df, text_size = 6)
+#'
+#' # Visualize phenotypic groups based on dominant epistatic gene action
+#' epi_de <- epist(female.geno = "AaBb", male.geno = "AaBb", type = "DE")
+#' pun_plot(pun2df = epi_de, text_size = 6, epistasis = TRUE)
 
 pun_plot <- function(pun2df, text_size = 12, epistasis = FALSE) {
 

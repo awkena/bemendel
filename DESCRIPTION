@@ -28,3 +28,5 @@ Imports:
     reshape2 (>= 1.4.4)
 Depends: 
     R (>= 4.3)
+RoxygenNote: 7.2.3
+Config/testthat/edition: 3
