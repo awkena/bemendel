@@ -137,10 +137,11 @@ order_als <- function(x) {
 #' @returns a punnett square table showing the genotypes of progenies in a
 #' genetic cross.
 #' @export
+#' @importFrom MASS fractions
 #'
 #' @examples
 #' # library(bemendel)
-#' pun1 <- do_pun(female.geno = "AaBbDd", male.geno = "AaBbDd")
+#' pun1 <- do_pun(female.geno = "AaBb", male.geno = "AaBb")
 #' pun1$punnett_square
 #' pun1$pun_summary
 
@@ -209,10 +210,11 @@ return(tabs)
 #'
 #' @returns a long format data frame for plotting punnett square.
 #' @export
+#' @importFrom reshape2 melt
 #'
 #' @examples
 #' # library(bemendel)
-#' pun1 <- do_pun(female.geno = "AaBbDd", male.geno = "AaBbDd")
+#' pun1 <- do_pun(female.geno = "AaBb", male.geno = "AaBb")
 #' long_df <- pun2df(pun1$punnett_square)
 #' long_df
 
@@ -413,6 +415,7 @@ epist <- function(female.geno,
 #'
 #'
 #' @export
+#' @import ggplot2
 #'
 #' @examples
 #' # library(bemendel)

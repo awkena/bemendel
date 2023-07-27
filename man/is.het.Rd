@@ -8,7 +8,7 @@ is.het(x)
 }
 \arguments{
 \item{x}{a character vector of split alleles for each locus--
-output of the `split_geno()` function.}
+output of the \code{split_geno()} function.}
 }
 \value{
 a logical value of TRUE if locus is heterozygous or FALSE if locus is

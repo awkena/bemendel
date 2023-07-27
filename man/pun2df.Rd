@@ -17,7 +17,7 @@ Function to melt punnett square to a long format data frame for plotting
 }
 \examples{
 # library(bemendel)
-pun1 <- do_pun(female.geno = "AaBbDd", male.geno = "AaBbDd")
+pun1 <- do_pun(female.geno = "AaBb", male.geno = "AaBb")
 long_df <- pun2df(pun1$punnett_square)
 long_df
 }

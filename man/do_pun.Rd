@@ -21,7 +21,7 @@ Function to create punnett square given the genotypes of parents
 }
 \examples{
 # library(bemendel)
-pun1 <- do_pun(female.geno = "AaBbDd", male.geno = "AaBbDd")
+pun1 <- do_pun(female.geno = "AaBb", male.geno = "AaBb")
 pun1$punnett_square
 pun1$pun_summary
 }

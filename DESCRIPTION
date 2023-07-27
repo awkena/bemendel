@@ -4,7 +4,8 @@ Title: Practice Mendelian Genetics in R
 Version: 0.0.0.9000
 Authors@R: c(
   person("Alexander", "Wireko Kena", email = "alex.kena24@gmail.com", 
-         role = c("aut", "cre")),
+         role = c("aut", "cre"),
+         comment = c(ORCID = "0000-0003-3385-4945")),
   person("Ebenezer", "Ogoe", email = "ebenezerogoe@gmail.com", 
          role = c("aut")),
   person("Geoffrey", "Preston Morris", email = "geoff.morris@colostate.edu", 
@@ -21,13 +22,15 @@ Suggests:
     knitr (>= 1.43),
     rmarkdown (>= 2.23),
     shinytest2 (>= 0.2.1),
-    testthat (>= 3.1.10)
+    testthat (>= 3.1.10),
+    vdiffr (>= 1.0.5)
 Imports: 
     ggplot2 (>= 3.4.2),
     MASS (>= 7.3.60),
     reshape2 (>= 1.4.4)
 Depends: 
     R (>= 4.3)
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Config/testthat/edition: 3
 URL: https://github.com/awkena/bemendel
