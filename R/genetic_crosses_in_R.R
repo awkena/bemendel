@@ -137,7 +137,6 @@ order_als <- function(x) {
 #' @returns a punnett square table showing the genotypes of progenies in a
 #' genetic cross.
 #' @export
-#' @importFrom MASS fractions
 #'
 #' @examples
 #' # library(bemendel)
@@ -155,51 +154,64 @@ do_pun <- function(female.geno, male.geno) {
   fem.gam <-  gamete(Loci.fem) # Generate female gametes
   mal.gam <- gamete(Loci.mal) # Generate male gametes
 
-# Create an empty matrix to hold genotypes of progenies after a cross
-pun1 <- matrix(NA, nrow = length(fem.gam), ncol = length(mal.gam))
-rownames(pun1) <- fem.gam # Assign female gametes
-colnames(pun1) <- mal.gam # Assign male gametes
+  # Create an empty matrix to hold genotypes of progenies after a cross
+  pun1 <- matrix(NA, nrow = length(fem.gam), ncol = length(mal.gam))
+  rownames(pun1) <- fem.gam # Assign female gametes
+  colnames(pun1) <- mal.gam # Assign male gametes
 
-for (i in rownames(pun1)) {
+  for (i in rownames(pun1)) {
 
-  for (j in colnames(pun1)) {
+    for (j in colnames(pun1)) {
 
-    # Combine female and male gametes to generate progeny genotypes and organize
-    # alleles occupying each locus
-    Geno <- paste0(sort(unlist(strsplit(c(i, j), ""))),
-                   collapse = "")
+      # Combine female and male gametes to generate progeny genotypes and organize
+      # alleles occupying each locus
+      Geno <- paste0(sort(unlist(strsplit(c(i, j), ""))),
+                     collapse = "")
 
-    # Split genotypes at each locus into alleles -- a list object output
-    FF <- split_geno(Geno)$Loci
+      # Split genotypes at each locus into alleles -- a list object output
+      FF <- split_geno(Geno)$Loci
 
-    # Re-order alleles at each locus and re-paste across all loci
-    KK <- paste0(sapply(FF, order_als), collapse = "")
+      # Re-order alleles at each locus and re-paste across all loci
+      KK <- paste0(sapply(FF, order_als), collapse = "")
 
-    pun1[i, j] <- KK
+      pun1[i, j] <- KK
 
-     }
+    }
 
   }
 
-# Summaries of progeny genotypes in punnett square
-# Convert genotype frequencies into fractions
-Geno.freq <- MASS::fractions(rev(table(pun1))/sum(table(pun1)))
+  # Summaries of progeny genotypes in punnett square
+  # Convert genotype frequencies into fractions
+  Geno.freq <- rev(table(pun1))
 
-tab1 <- data.frame(Geno.freq)
-colnames(tab1)[1] <- "Genotype"
+  tab1 <- as.data.frame(Geno.freq)
 
-if (dim(tab1)[1] > 1) {
+  if (dim(tab1)[1] == 1 && dim(tab1)[2] == 1) {
 
-  tab1$freq2 <- as.character(MASS::fractions(tab1$Freq))
+    tab1 <- cbind(progeny = rownames(tab1), tab1)
 
-} else (tab1$freq2 <- "1/1")
+    tab1$pop_size <- sum(tab1[,2])
 
+    tab1$freq <- tab1[,2]/tab1[,3]
 
-tab2 <- data.frame(pun1)
+    colnames(tab1)[1:2] <- c("progeny", "nobs")
+    rownames(tab1) <- NULL
 
-tabs <- list(punnett_square = tab2, pun_summary = tab1)
+  } else {
 
-return(tabs)
+    tab1$pop_size <- sum(tab1[,2])
+
+    tab1$freq <- tab1[,2]/tab1[,3]
+
+    colnames(tab1)[1:2] <- c("progeny", "nobs")
+
+  }
+
+  tab2 <- data.frame(pun1)
+
+  tabs <- list(punnett_square = tab2, pun_summary = tab1)
+
+  return(tabs)
 
 } # End of do_pun() function
 

@@ -25,9 +25,13 @@ Suggests:
     testthat (>= 3.1.10),
     vdiffr (>= 1.0.5)
 Imports: 
+    bubbles (>= 0.2),
     ggplot2 (>= 3.4.2),
-    MASS (>= 7.3.60),
-    reshape2 (>= 1.4.4)
+    htmltools (>= 0.5.5),
+    reactable (>= 0.4.4),
+    reshape2 (>= 1.4.4),
+    shiny (>= 1.7.4.1),
+    shinyjs (>= 2.1.0)
 Depends: 
     R (>= 4.3)
 Roxygen: list(markdown = TRUE)
