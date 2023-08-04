@@ -41,3 +41,5 @@ RoxygenNote: 7.2.3
 Config/testthat/edition: 3
 URL: https://github.com/awkena/bemendel
 BugReports: https://github.com/awkena/bemendel/issues
+Remotes:  
+    jcheng5/bubbles
