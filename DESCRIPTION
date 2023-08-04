@@ -25,6 +25,8 @@ Suggests:
     testthat (>= 3.1.10),
     vdiffr (>= 1.0.5)
 Imports: 
+    argonDash (>= 0.2.0),
+    argonR (>= 0.2.0),
     bubbles (>= 0.2),
     ggplot2 (>= 3.4.2),
     htmltools (>= 0.5.5),

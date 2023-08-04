@@ -12,6 +12,8 @@
 #' @importFrom shinyjs useShinyjs
 #' @import htmltools
 #' @import bubbles
+#' @import argonR
+#' @import argonDash
 
 run_app <- function() {
   # Find and launch the app
