@@ -8,6 +8,7 @@
 [![Codecov test
 coverage](https://codecov.io/gh/awkena/bemendel/branch/master/graph/badge.svg)](https://app.codecov.io/gh/awkena/bemendel?branch=master)
 [![test-coverage](https://github.com/awkena/bemendel/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/awkena/bemendel/actions/workflows/test-coverage.yaml)
+[![R-CMD-check](https://github.com/awkena/bemendel/actions/workflows/R%20CMD%20Check.yml/badge.svg)](https://github.com/awkena/bemendel/actions/workflows/R%20CMD%20Check.yml)
 <!-- badges: end -->
 
 # Practice Mendelian Genetics in R
